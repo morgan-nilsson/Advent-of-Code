@@ -11,6 +11,6 @@ public class Wrapping {
         int l = inpScanner.nextInt();
 
         int wrappingPaper = 2 * l * w + 2 * w * h + 2 * h * l;
-        int extra = Math.min(Math.min(2, wrappingPaper), wrappingPaper)
+        int extra = Math.min(Math.min(2, wrappingPaper), wrappingPaper);
     }    
 }
