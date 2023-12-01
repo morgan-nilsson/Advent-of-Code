@@ -25,8 +25,13 @@ public class day1 {
         while (input.hasNext()) {
             String s = "";
             String line = input.nextLine();
-            s + findFirst(line);
-            s + findLast(line);
+            try { 
+                s += findFirst(line);
+                s += findLast(line);
+            } catch (IllegalArgumentException e) {
+                System.err.println("There was no numbers in the given String");
+                return;
+            }
             sum += Integer.parseInt(s);
         }
         input.close();
@@ -35,24 +40,19 @@ public class day1 {
 
     public static int findFirst(String line) {
         for(int i = 0; i < line.length(); i++){
-            try {
-                int first = Integer.parseInt(line.charAt(i));
-            } catch (NumberFormatException e) {
-                continue;
+            if(Character.isDigit(line.charAt(i))){
+                return Integer.valueOf(line.charAt(i)) - 48;
             }
-            return first;
         }
+        throw new IllegalArgumentException();
     }
 
     public static int findLast(String line) {
-        
-        for(int i = line.length(); i > 0;i--){
-            try {
-                int last = Integer.parseInt(line.charAt(i));
-            } catch (NumberFormatException e) {
-                continue;
+        for(int i = line.length() - 1; i > 0; i--){
+            if(Character.isDigit(line.charAt(i))){
+                return Integer.valueOf(line.charAt(i)) - 48;
             }
-            return last;
         }
+        throw new IllegalArgumentException();
     }
 }
