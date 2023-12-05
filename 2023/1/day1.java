@@ -29,8 +29,7 @@ public class day1 {
                 s += findFirst(line);
                 s += findLast(line);
             } catch (IllegalArgumentException e) {
-                System.err.println("There was no numbers in the given String");
-                return;
+                System.err.println("There was no numbers in the given String: " + line );
             }
             sum += Integer.parseInt(s);
         }
@@ -48,7 +47,7 @@ public class day1 {
     }
 
     public static int findLast(String line) {
-        for(int i = line.length() - 1; i > 0; i--){
+        for(int i = line.length() - 1; i >= 0; i--){
             if(Character.isDigit(line.charAt(i))){
                 return Integer.valueOf(line.charAt(i)) - 48;
             }
