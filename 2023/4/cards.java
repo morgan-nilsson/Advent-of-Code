@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Vector;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -36,37 +37,31 @@ public class cards {
         try {
             input = new Scanner(file);
         } catch (Exception e) {
-            System.err.println("Error reading frim file");
+            System.err.println("Error reading from file");
             return;
         }
-        int[] cardScores = new int[cardNumber];
+        int cardSum = 0;
         for(int i = 0; i < cardNumber; i++){
-            cardScores[i] = findCardScores(input.nextLine());
+            cardSum += findCardScores(input.nextLine());
         }
         input.close();
-        printScores(cardScores);
+        System.out.println(cardSum);
     }
 
     public static int findCardScores(String line){
         // 0 - 99 two digit numbers
-        Boolean[] checkMap = new Boolean[100];  
-        int[] winners = parseCardWinners(line);
-        for(int i = 0; i < winners.length; i++){
-            System.out.printf("%d ", winners[i]);
-        }
-        System.out.println();
-        int[] picks = parseCardPicks(line);
-        for(int i = 0; i < picks.length; i++){
-            System.out.printf("%d ", picks[i]);
-        }
+        boolean[] checkMap = new boolean[100];  
+        Vector<Integer> winners = parseCardWinners(line);
 
-        for(int i = 0; i < winners.length; i++){
-            checkMap[winners[i]] = true;
+        Vector<Integer> picks = parseCardPicks(line);
+
+        for(int i = 0; i < winners.size(); i++){
+            checkMap[winners.get(i)] = true;
         }
 
         int wins = 0;
-        for(int i = 0; i < picks.length; i++){
-            if(checkMap[picks[i]] == true){
+        for(int i = 0; i < picks.size(); i++){
+            if(checkMap[picks.get(i)] == true){
                 wins++;
             }
         }
@@ -80,47 +75,46 @@ public class cards {
         } else if(wins == 1){
             return 1;
         } else{
-            return (int)Math.pow(2, wins);
+            return (int)Math.pow(2, wins - 1);
         }
     }
 
-    public static int[] parseCardWinners(String line){
+    public static Vector<Integer> parseCardWinners(String line){
         Scanner input = new Scanner(line);
         input.next();
 
-        int[] winners = new int[8];
+        Vector<Integer> winners = new Vector<>();
         String value = "";
         while (value.compareTo("|") != 0) {
             value = input.next();
         }
-        input.next();
         int i = 0;
         while(input.hasNext()){
-            winners[i] = Integer.parseInt(input.next());
+            winners.add(i, Integer.parseInt(input.next()));
             i++;
         }
         input.close();
         return winners;
     }
 
-    public static int[] parseCardPicks(String line) { 
+    public static Vector<Integer> parseCardPicks(String line) { 
         Scanner input = new Scanner(line);
         input.next();
-
-        int[] picks = new int[8];
+        input.next();
+        Vector<Integer> picks = new Vector<>();
         String value = input.next();
         int i = 0;
         while(value.compareTo("|") != 0) {
-            value = input.next();
-            picks[i] = Integer.parseInt(value);
+            picks.add(i, Integer.parseInt(value));
             i++;
+            value = input.next();
         }
         input.close();
         return picks;
     }
     public static void printScores(int[] scores) {
        for(int i = 0; i < scores.length; i++){
-            System.out.printf("Card %d score: %d\n", i, scores[i]);
+            System.out.printf("Card %d score: %d\n", i + 1, scores[i]);
        }
     }
 }

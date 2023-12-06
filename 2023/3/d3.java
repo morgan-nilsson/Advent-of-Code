@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Vector;
 import java.io.File;
 import java.io.FileNotFoundException;
 /**
@@ -26,18 +27,40 @@ public class d3 {
             return;
         }
 
-        int lineCount = 0;
+        Vector<String> schem = new Vector<String>(); 
         while(input.hasNextLine()){
-            input.nextLine();
-            lineCount++;
+            schem.add(i, input.nextLine());
         }
 
-        input.reset();
-        schem = new String[lineCount];
-        for(int i = 0; i < lineCount; i++){
-            schem[i] = input.nextLine();
+        int sum = 0;
+        for(int i = 0; i < schem.size(); i++){
+            sum += lineSum(schem.get(i));
         }
+    }
 
+    public static int lineSum(String line){
+        for(int i = 0; i < line.length(); i++){
+            int index;
+            if(Character.isDigit(line.charAt(i))){
+                while (Character.isDigit(i + index)){
+                    i++;
+                }
+            }
+        }
+    }
+
+    
+
+    public static boolean isPartNumber(int startIndex, int endIndex, int rowIndex, Vector<String> schem){
+        for(int offset = 0; offset < startIndex - endIndex; offset++){
+            if(isPart(startIndex + offset, rowIndex, schem) == false){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isPart(int index, int rowIndex, Vector<String> schem){
 
     }
 }
