@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 public class CamelPoker {
 
-    public static String[] deck;
+    public static String[] decks;
     public static int[] bids;
     public static void main(String[] args) {
         Scanner input = null;
@@ -18,7 +18,7 @@ public class CamelPoker {
 
         int deckIndex = 0;
         while(input.hasNext()){
-            deck[deckIndex] = input.next();
+            decks[deckIndex] = input.next();
             bods[deckIndex] = input.nextInt();
             deckIndex++;
         }
@@ -33,10 +33,9 @@ public class CamelPoker {
     public static int winningDeck(int deck1Index, int deck2Index){
         int deck1Class = 0;
         int deck2Class = 0;
-        String deck1 = deck[deck1Index];
-        String deck2 = deck[deck2Index];
+        String deck1 = decks[deck1Index];
+        String deck2 = decks[deck2Index];
 
-        // 5 pair
         deck1Class = calcClass(deck1);
         deck2Class = calcClass(deck2);
         if(deck1Class == deck2Class){
@@ -49,7 +48,10 @@ public class CamelPoker {
     }
 
     public static int calcClass(int deckIndex){
-        
+        String deck = decks[deckIndex]
+       if(deck.charAt(0) == deck.charAt(1) && deck.charAt(2) == deck.charAt(3) && deck.charAt(5) == deck.charAt(0) && deck.charAt(0) == deck.charAt(2)){
+            return 7;
+       }
     }
 
     public static int calcTieBreaker(char c){
