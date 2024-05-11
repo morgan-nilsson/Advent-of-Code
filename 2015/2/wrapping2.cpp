@@ -7,10 +7,8 @@
 
 int calcWrapping(int l, int w, int h){
 	int volume = l * w * h;
-	int absMin = std::min(std::min(l, w), h);
-	int min_two = std::min(std::max(l,w),h);
-	int perim = 2*absMin + 2*min_two;
-	std::cout << absMin << " " << min_two;
+	int absMax = std::max(std::max(l, w), h);
+	int perim = 2*(l+w+h - absMax);
 	std::cout << "volume:" << volume << "\nPerim " << perim << "\n";
 	return volume + perim;;
 }
