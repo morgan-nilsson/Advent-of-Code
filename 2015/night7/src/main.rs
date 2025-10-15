@@ -8,7 +8,8 @@ fn main() {
     let mut waitlist: VecDeque<&str> = VecDeque::new();
 
     let lines = INPUT.lines();
-    waitlist.push_back("956 -> b");
+    vars.insert("b", 956);
+    // also went and deleted the assignment in the input
 
     for line in lines {
         waitlist.push_back(line);
