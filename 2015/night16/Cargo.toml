@@ -1,7 +1,0 @@
-[package]
-name = "day16"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
-scan_fmt = "0.2.6"
