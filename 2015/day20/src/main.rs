@@ -1,0 +1,24 @@
+static INPUT: usize = 29000000;
+
+fn main() {
+
+    let mut arr = vec![0; INPUT];
+
+    // for every elf
+    for i in 1..INPUT {
+        // for every house that elf visits
+        for j in (i..INPUT).step_by(i) {
+            arr[j] += i * 10;
+        }
+
+    }
+
+    // What is the lowest house number of the house to get at least as many presents as the number in your puzzle input?
+    for i in 0..INPUT {
+        if arr[i] >= INPUT {
+            println!("House number: {}", i);
+            return;
+        }
+    }
+
+}
